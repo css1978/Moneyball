@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.loanly.model">
+	<class name="Loan" table="loan">
+		<id name="loansid" type="java.lang.Long" column="loansid">
+      		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> 
+	            <param name="sequence_name">LOAN_SEQ</param>
+    	        <param name="optimizer">none</param>
+            	<param name="increment_size">1</param> 
+         	</generator>
+		</id>
+        
+        <set name="loan_details" inverse="true" cascade="all-delete-orphan">
+        	<key column="loansid" ></key>
+            <one-to-many class="com.loanly.model.Loan_detail"/>
+        </set>
+		
+		<property name="login_name" type="java.lang.String" column="login_name"/>
+		<many-to-one name="platform" class="Platform" cascade="none" lazy="false"
+			column="platform_id">
+		</many-to-one>
+		<property name="amount" type="double" column="amount"/>
+		<property name="interest_rate" type="float" column="interest_rate"/>
+		<property name="interest_rate_type" type="java.lang.Integer" column="interest_rate_type"/>
+		<property name="award_rate" type="float" column="award_rate"/>
+		<property name="continue_rate" type="float" column="continue_rate"/>
+		<property name="offline_rate" type="float" column="offline_rate"/>
+		<property name="fee_rate" type="float" column="fee_rate"/>
+		<property name="daily" type="java.lang.Integer" column="daily"/>
+		<property name="second" type="java.lang.Integer" column="second"/>
+		<property name="duration" type="java.lang.Integer" column="duration"/>
+		<property name="loan_type" type="java.lang.Integer" column="loan_type"/>
+		<property name="delegate_rate" type="float" column="delegate_rate"/>
+		<property name="loan_date" type="java.sql.Date" column="loan_date"/>
+		<property name="return_type" type="java.lang.Integer" column="return_type"/>
+		<property name="status" type="java.lang.Integer" column="status"/>
+		<property name="comments" type="java.lang.String" column="comments"/>
+		<property name="money_from" type="java.lang.Integer" column="money_from"/>
+		<property name="money_to" type="java.lang.Integer" column="money_to"/>
+		<property name="interest_type" type="java.lang.Integer" column="interest_type"/>
+		<property name="award_amt" type="double" column="award_amt"/>
+		<property name="interest_amt" type="double" column="interest_amt"/>
+		<property name="continue_amt" type="double" column="continue_amt"/>
+		<property name="fee_amt" type="double" column="fee_amt"/>
+		<property name="offline_amt" type="double" column="offline_amt"/>
+		<property name="return_date" type="java.sql.Date" column="return_date"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE beans PUBLIC    
+    "-//SPRING//DTD BEAN//EN"   
+    "http://www.springframework.org/dtd/spring-beans.dtd">  
+<beans default-autowire="autodetect">  
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	<bean name="welcome" class="com.loanly.view.WelcomeAction">
+	  <property name="loanDtlService" ref="LoanDtlService"></property>
+	</bean>
+	<bean name="loandtl" class="com.loanly.view.PageListLoanDtlAction">
+	  <property name="loanDtlService" ref="LoanDtlService"></property>
+	</bean>
+	<!-- service -->
+	<bean name="LoanDtlService" class="com.loanly.view.LoanDtlServiceImpl">
+	  <property name="loanDtlDao" ref="LoanDtlDaoImpl"></property>
+	</bean>
+	<!-- dao -->
+	<bean name="LoanDtlDaoImpl" class="com.loanly.controller.LoanDtlDaoImpl">
+	   <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+ 
+	<bean name="loanlist" class="com.loanly.view.PageListLoanAction">
+	  <property name="loanService" ref="LoanService"></property>
+	</bean>
+	<!-- service -->
+	<bean name="LoanService" class="com.loanly.view.LoanServiceImpl">
+	  <property name="loanDao" ref="LoanDaoImpl"></property>
+	</bean>
+	<!-- dao -->
+	<bean name="LoanDaoImpl" class="com.loanly.controller.LoanDaoImpl">
+	   <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean name="platform_form" class="com.loanly.view.PageListPlatformAction">
+	  <property name="platformService" ref="PlatformService"></property>
+	</bean>
+	<!-- service -->
+	<bean name="PlatformService" class="com.loanly.view.PlatformServiceImpl">
+	  <property name="platformDao" ref="PlatformDaoImpl"></property>
+	</bean>
+	<!-- dao -->
+	<bean name="PlatformDaoImpl" class="com.loanly.controller.PlatformDaoImpl">
+	   <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>  

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.loanly.model">
+	<class name="Platform" table="platform">
+		<id name="platform_id" type="java.lang.Long" column="platform_id">
+      		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> 
+	            <param name="sequence_name">PLATFORM_SEQ</param>
+    	        <param name="optimizer">none</param>
+            	<param name="increment_size">1</param> 
+         	</generator>		
+        </id>
+        <set name="loan_details" inverse="true" cascade="none">
+        	<key column="platform_id" ></key>
+            <one-to-many class="com.loanly.model.Loan_detail"/>
+        </set>        
+		<property name="login_name" type="java.lang.String" column="login_name"/>
+		<property name="platform_name" type="java.lang.String" column="platform_name"/>
+		<property name="platform_url" type="java.lang.String" column="platform_url"/>
+		<property name="platform_rate" type="float" column="platform_rate"/>
+		<property name="active" type="java.lang.Integer" column="active"/>
+		<property name="online_time" type="java.sql.Date" column="online_time"/>
+		<property name="offline" type="java.lang.Integer" column="offline"/>
+		<property name="delegate_rate" type="float" column="delegate_rate"/>
+	</class>
+</hibernate-mapping>

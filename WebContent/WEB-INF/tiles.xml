@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout" template="/Global/BaseLayout.jsp">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="header" value="/Global/Header.jsp" />
+        <put-attribute name="menu" value="/Global/Menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/Global/Footer.jsp" />
+    </definition>
+    <definition name="/register.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Global/Register.jsp" />
+    </definition>
+    <definition name="/login_edit.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Global/LoginEdit.jsp" />
+    </definition>
+    <definition name="/modifypass.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Global/ModifyPass.jsp" />
+    </definition>
+    <definition name="/resetpass.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Global/ResetPass.jsp" />
+    </definition>
+    
+    
+    <definition name="/welcome.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Loan/Welcome.jsp" />
+    </definition>
+    <definition name="/summary.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理" />
+        <put-attribute name="body" value="/Loan/LoanSummary.jsp" />
+    </definition>
+    <definition name="/loan.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-录入一笔" />
+        <put-attribute name="body" value="/Loan/Loan.jsp" />
+    </definition>
+    
+    
+    <definition name="/platform.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-平台管理" />
+        <put-attribute name="body" value="/Loan/Platform.jsp" />
+    </definition>
+    <definition name="/asset_account.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-账户管理" />
+        <put-attribute name="body" value="/Loan/AssetAccount.jsp" />
+    </definition>
+    <definition name="/loanList.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-借出明细" />
+        <put-attribute name="body" value="/Loan/LoanList.jsp" />
+    </definition>
+    <definition name="/loanDtlList.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-待收明细" />
+        <put-attribute name="body" value="/Loan/LoanDtlList.jsp" />
+    </definition>
+    <definition name="/platform_edit.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-平台修改" />
+        <put-attribute name="body" value="/Loan/PlatformEdit.jsp" />
+    </definition>
+    <definition name="/loan_edit.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-借出修改" />
+        <put-attribute name="body" value="/Loan/LoanEdit.jsp" />
+    </definition>
+    <definition name="/action_success.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-操作成功" />
+        <put-attribute name="body" value="/Global/action_success.jsp" />
+    </definition>
+    <definition name="/WeixinFocus.tiles" extends="baseLayout">
+        <put-attribute name="title" value="P2P 网贷记账 财务管理-微信平台信息" />
+        <put-attribute name="body" value="/Weixin/WeixinFocus.jsp" />
+    </definition>
+
+
+</tiles-definitions>

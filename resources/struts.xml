@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation"
+        value="false" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources"
+        value="aa" />
+	<constant name="struts.ui.theme" value="simple" />
+
+	  <constant name="objectFactory" value="spring"></constant>
+ 
+    <package name="default" extends="json-default" namespace="/">
+
+
+        <result-types>
+            <result-type name="tiles"
+                class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.loanly.util.LoginInterceptor">
+					<param name="excludeMethods">register_req*,register_req,loginadd,WeixinFocus,logout</param>
+			</interceptor>
+			<interceptor-stack name="loginDefaultStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor">
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="loginDefaultStack">
+			
+		</default-interceptor-ref>
+
+		<global-results>
+			<result name="login" type="redirect">Login.jsp${GoingToQeury}</result>
+			<!--  result name="error" >/Login.jsp</result>-->
+		</global-results>		
+  		
+  		<!--
+  		<global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+            <exception-mapping exception="java.io.IOException" result="error"/>
+            <exception-mapping exception="org.apache.tiles.TilesException" result="error"/>
+            <exception-mapping exception="javax.servlet.ServletException" result="error"/>
+            <exception-mapping exception="javax.servlet.jsp.JspException" result="error"/>
+            <exception-mapping exception="org.apache.tiles.util.TilesIOException" result="error"/>
+        </global-exception-mappings>
+         -->
+
+		<action name="logout" class="com.loanly.util.LogoutAction">
+            <result name="success">Login.jsp</result>
+            <result name="input">Login.jsp</result>
+		</action>
+		
+		<action name="login" class="com.loanly.util.LoginAction" method="login">
+			<result type="redirect">${goingToURL}</result>
+			<result name="input">Login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+        <action name="register_req">
+            <result name="success" type="tiles">/register.tiles</result>
+        </action>
+
+        <action name="loginadd"
+            class="com.loanly.view.RegisterAction" method="add">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input" type="tiles">/register.tiles</result>
+        </action>
+
+        <action name="loginupdate_req"
+            class="com.loanly.view.RegisterAction" method="getrecord">
+            <result name="success" type="chain">login_query_succ</result>
+            <result name="input"  type="tiles">/login_edit.tiles</result>
+        </action>
+        <action name="login_query_succ">
+            <result name="success"  type="tiles">/login_edit.tiles</result>
+        </action>        
+        <action name="loginupdate"
+            class="com.loanly.view.RegisterAction" method="modifyInfo">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input"  type="tiles">/login_edit.tiles</result>
+        </action>
+    
+        <action name="modifypass_req"
+        	class="com.loanly.view.RegisterAction" method="getrecord">
+            <result name="success" type="chain">pass_query_succ</result>
+            <result name="input"  type="tiles">/modifypass.tiles</result>
+        </action>
+        <action name="pass_query_succ">
+            <result name="success"  type="tiles">/modifypass.tiles</result>
+        </action>
+        <action name="modifypass"
+            class="com.loanly.view.RegisterAction" method="modifypass">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input"  type="tiles">/modifypass.tiles</result>
+        </action>
+
+        <action name="resetPasswordUI"
+        	class="com.loanly.view.ResetPasswordAction" method="verifyresetlink">
+            <result name="success" type="chain">verify_succ</result>
+            <result name="input"  type="tiles">/action_success.tiles</result>
+        </action>
+        <action name="verify_succ">
+            <result name="success"  type="tiles">/resetpass.tiles</result>
+        </action>
+        <action name="resetpass"
+            class="com.loanly.view.ResetPasswordAction" method="resetpass">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input"  type="tiles">/resetpass.tiles</result>
+        </action>
+
+
+        <action name="forgotpass"
+            class="com.loanly.view.RegisterAction" method="forgotpass">
+            <result name="success">Login.jsp</result>
+            <result name="input">Login.jsp</result>
+        </action>
+
+
+        <action name="index"
+            class="welcome" method="todayReturnList">
+            <result name="success" type="tiles">/welcome.tiles</result>
+        </action>
+        
+        
+        <action name="view_welcome*"
+            class="welcome" method="todayReturnList">
+            <result name="success" type="tiles">/welcome.tiles</result>
+            <result name="error">Login.jsp</result>
+        </action>
+
+        <action name="view_summary"
+            class="com.loanly.view.SummaryAction">
+            <result name="success" type="tiles">/summary.tiles</result>
+            <result name="error">Login.jsp</result>
+        </action>
+
+        <action name="bindWeixinID"
+            class="com.loanly.view.WeixinService" method="bindWXID">
+            <result name="success" type="tiles">/action_success.tiles</result>  
+        </action>
+
+        <action name="unBindWeixinID"
+            class="com.loanly.view.WeixinService" method="unBindWXID">
+            <result name="success" type="tiles">/action_success.tiles</result>  
+        </action>
+
+        <action name="getPlatformFee"
+            class="com.loanly.view.JqPlatformFee" method="getPlatformFee">
+            <result name="getPlatformFee" type="json"></result>  
+        </action>
+        
+        <action name="loan-form"
+            class="com.loanly.view.LoanAction">
+            <result name="success" type="tiles">/loan.tiles</result>
+            <result name="input" type="tiles">/loan.tiles</result>
+        </action>
+        
+        <action name="loan_list*"
+            class="loanlist">
+            <result name="success" type="tiles">/loanList.tiles</result>
+            <result name="input" type="tiles">/loanList.tiles</result>
+        </action>
+        <action name="loan_detail_list*"
+            class="loandtl">
+            <result name="success" type="tiles">/loanDtlList.tiles</result>
+            <result name="input" type="tiles">/loanDtlList.tiles</result>
+        </action>
+        
+        
+        <action name="platform-form" class="platform_form">
+            <result name="success" type="tiles">/platform.tiles</result>
+            <result name="input" type="tiles">/platform.tiles</result>
+        </action>
+        <action name="asset_account-form">
+            <result name="success" type="chain">gotoAsset</result>
+        </action>
+        <action name="gotoAsset">
+            <result name="success" type="tiles">/asset_account.tiles</result>
+        </action>
+        
+
+        <action name="AddPlatform"
+            class="com.loanly.view.PlatformAction" method="add">
+            <result name="success" type="chain">addplatform_succ</result>
+            <result name="input" type="tiles">/platform.tiles</result>
+        </action>
+        <action name="Platform_delete"
+            class="com.loanly.view.PlatformAction" method="delete">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input"  type="tiles">/platform.tiles</result>
+        </action>
+        <action name="addplatform_succ"
+            class="com.loanly.view.PlatformAction">
+            <result name="success"  type="tiles">/platform.tiles</result>
+            <result name="input"  type="tiles">/platform.tiles</result>
+        </action>        
+        
+        <action name="Platform_modify"
+            class="com.loanly.view.PlatformAction" method="getrecord">
+            <result name="success" type="chain">platform_query_succ</result>
+            <result name="input"  type="tiles">/platform_edit.tiles</result>
+        </action>
+        <action name="platform_query_succ">
+            <result name="success"  type="tiles">/platform_edit.tiles</result>
+        </action>        
+        <action name="Platform_update"
+            class="com.loanly.view.PlatformAction" method="update">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input"  type="tiles">/platform_edit.tiles</result>
+        </action>
+        
+        <action name="Loan_modify"
+            class="com.loanly.view.LoanAction" method="getrecord">
+            <result name="success" type="chain">loan_query_succ</result>
+            <result name="input" type="tiles">/loan_edit.tiles</result>
+        </action>
+        <action name="loan_query_succ">
+            <result name="success"  type="tiles">/loan_edit.tiles</result>
+            <result name="input" type="tiles">/loan_edit.tiles</result>
+        </action>        
+        <action name="loan_update"
+            class="com.loanly.view.LoanAction" method="update">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input" type="tiles">/loan_edit.tiles</result>
+        </action>
+        
+        
+        
+        <action name="AddLoan"
+            class="com.loanly.view.LoanAction" method="add">
+            <result name="success" type="tiles">/action_success.tiles</result>
+            <result name="input" type="tiles">/loan.tiles</result>
+        </action>
+        <action name="Loan_delete"
+            class="com.loanly.view.LoanAction" method="delete">
+            <result name="success" type="tiles">/action_success.tiles</result>
+        </action>
+        
+        <action name="AddAssetaccount"
+            class="com.loanly.view.AssetaccountAction" method="add">
+            <result name="success" type="chain">addasset_succ</result>
+            <result name="input" type="tiles">/asset_account.tiles</result>
+        </action>
+        <action name="Assetaccount_delete"
+            class="com.loanly.view.AssetaccountAction" method="delete">
+            <result name="success" type="chain">addasset_succ</result>
+        </action>
+        <action name="addasset_succ"
+            class="com.loanly.view.AssetaccountAction">
+            <result name="success" type="tiles">/asset_account.tiles</result>
+        </action>        
+        
+        <action name="Loan_detail_return"
+            class="com.loanly.view.Loan_detailAction" method="setLoanDtlReturn">
+            <result name="success" type="chain">view_welcome</result>
+        </action>
+        <action name="Loan_detail_return_list"
+            class="com.loanly.view.Loan_detailAction" method="setLoanDtlReturn">
+            <result name="success" type="chain">loan_detail_list</result>
+        </action>
+        <action name="Loan_detail_not_return_list"
+            class="com.loanly.view.Loan_detailAction" method="setLoanDtlNotReturn">
+            <result name="success" type="chain">loan_detail_list</result>
+        </action>
+
+        <action name="Loan_detail_bad"
+            class="com.loanly.view.Loan_detailAction" method="setLoanDtlBad">
+            <result name="success" type="tiles">/action_success.tiles</result>
+        </action>
+        
+        <action name="WeixinFocus">
+            <result name="success" type="tiles">/WeixinFocus.tiles</result>
+        </action>
+        
+        </package>
+</struts>

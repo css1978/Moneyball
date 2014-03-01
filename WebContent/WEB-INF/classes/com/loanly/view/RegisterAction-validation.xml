@@ -1,0 +1,46 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="login.login_name">
+		<field-validator type="requiredstring" short-circuit="true">     
+			<message>登录名不能为空!</message>    
+		</field-validator> 
+    </field>
+    <field name="login.mobile">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>手机号码非常重要！</message>
+		</field-validator>
+         <field-validator type="regex">
+        	<param name="expression"><![CDATA[^1[358]\d{9}$]]></param>
+        	<message>请输入正确的手机号码!</message>
+   		 </field-validator>
+    </field>
+    <field name="login.email">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>邮件用来找回密码,非常重要！</message>
+		</field-validator>
+     	<field-validator type="email">
+          	<message>你的电子邮件地址必须是一个有效的电邮地址</message>
+        </field-validator>
+    </field>
+	<field name="login.logpass">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>密码不能为空！</message>
+		</field-validator>
+		<field-validator type="stringlength" short-circuit="true">
+			<param name="maxLength">18</param>
+			<param name="minLength">6</param>
+			<message>密码必须为6到18位字符！</message>
+		</field-validator>
+	</field>
+	<field name="repassword">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>重复密码不能为空！</message>
+		</field-validator>	
+		<field-validator type="fieldexpression">
+			<param name="expression"><![CDATA[repassword.equals(login.logpass)]]></param>
+			<message>两次密码输入不一致！</message>
+		</field-validator>
+	</field>	
+   
+</validators>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.loanly.model">
+	<class name="Loan_detail" table="loan_detail">
+		<id name="record_id" type="java.lang.Long" column="record_id">
+      		<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> 
+	            <param name="sequence_name">LOAN_DETAIL_SEQ</param>
+    	        <param name="optimizer">none</param>
+            	<param name="increment_size">1</param> 
+         	</generator>		
+		</id>
+		<property name="login_name" type="java.lang.String" column="login_name"/>
+		<many-to-one name="loan" class="Loan" cascade="none" lazy="false"
+			column="loansid">
+		</many-to-one>
+		<many-to-one name="platform" class="Platform" cascade="none" lazy="false"
+			column="platform_id">
+		</many-to-one>
+		<property name="period" type="java.lang.Integer" column="period"/>
+		<property name="total_period" type="java.lang.Integer" column="total_period"/>
+		<property name="interest_amt" type="java.lang.Double" column="interest_amt"/>
+		<property name="own_amt" type="java.lang.Double" column="own_amt"/>
+		<property name="fee_amt" type="java.lang.Double" column="fee_amt"/>
+		<property name="interest_rate" type="java.lang.Float" column="interest_rate"/>
+		<property name="loan_date" type="java.sql.Date" column="loan_date"/>
+		<property name="expire_date" type="java.sql.Date" column="expire_date"/>
+		<property name="status" type="java.lang.Integer" column="status"/>
+		<property name="return_date" type="java.sql.Date" column="return_date"/>
+		<property name="late_charge" type="java.lang.Double" column="late_charge"/>
+		<property name="comments" type="java.lang.String" column="comments"/>
+	</class>
+</hibernate-mapping>

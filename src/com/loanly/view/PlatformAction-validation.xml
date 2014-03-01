@@ -1,0 +1,30 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="platform.platform_name">
+		<field-validator type="requiredstring" short-circuit="true"> 
+			<param name="trim">true</param>    
+			<message>名称不能为空!</message>    
+		</field-validator> 
+    </field>
+
+    <field name="platform.platform_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>费率不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	费率必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+    
+    <field name="platform.platform_url">
+		<field-validator type="url" >     
+			<message>平台地址必须是一个有效的网址!</message>    
+		</field-validator> 
+    </field>
+    
+</validators>

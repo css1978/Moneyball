@@ -1,0 +1,92 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="loan.interest_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>利率不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">1.0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	利率必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+
+    <field name="loan.duration">
+		<field-validator type="required" short-circuit="true">     
+			<message>期限不能为空!</message>    
+		</field-validator> 
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">1000000</param>
+            <message>
+            	期限必须大于0
+            </message>
+        </field-validator>
+    </field>
+    
+    <field name="loan.award_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>投标奖励不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	投标奖励必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+
+    <field name="loan.continue_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>续投奖励不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	续投奖励必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+    <field name="loan.offline_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>线下奖励不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	线下奖励必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+    <field name="loan.fee_rate">
+		<field-validator type="required" short-circuit="true">     
+			<message>管理费不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">0</param>
+            <param name="maxInclusive">100.0</param>
+            <message>
+            	管理费必须在${minInclusive}和${maxInclusive}之间
+            </message>
+        </field-validator>
+    </field>
+    <field name="loan.amount">
+		<field-validator type="required" short-circuit="true">     
+			<message>金额不能为空!</message>    
+		</field-validator> 
+        <field-validator type="double">
+            <param name="minInclusive">1</param>
+            <param name="maxInclusive">999999999999</param>
+            <message>
+            	金额必须大于${minInclusive}
+            </message>
+        </field-validator>
+    </field>
+
+</validators>
